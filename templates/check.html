@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Check a message or link · ThreatLens{% endblock %}
+{% block content %}
+<main class="narrow">
+  <section class="panel" aria-labelledby="check-h">
+    <h1 id="check-h">What do you want to check?</h1>
+
+    <div class="tabs" role="tablist" aria-label="Type of check">
+      <button role="tab" id="tab-message" aria-selected="true" aria-controls="pane-message" class="tab">A message</button>
+      <button role="tab" id="tab-url" aria-selected="false" aria-controls="pane-url" class="tab" tabindex="-1">A web address</button>
+    </div>
+
+    <div id="error" class="error" role="alert" hidden></div>
+
+    <form id="pane-message" role="tabpanel" aria-labelledby="tab-message" class="pane" novalidate>
+      <label for="msg-input">Paste the SMS, email, or chat message</label>
+      <textarea id="msg-input" rows="9" maxlength="5000" placeholder="Dear customer, your account will be blocked today. Update your KYC now: http://…"></textarea>
+      <div class="row">
+        <span class="count" id="msg-count">0 / 5000</span>
+        <button type="submit" class="btn primary">Check message</button>
+      </div>
+      <div class="samples">
+        <span>Try an example:</span>
+        <button type="button" class="chip" data-kind="message" data-sample="URGENT: Your SBI account has been suspended. Verify your KYC within 24 hours or legal action will be taken. Click here: http://sbi-kyc-update.xyz/login and share the OTP you receive.">Bank KYC threat</button>
+        <button type="button" class="chip" data-kind="message" data-sample="Congratulations! You have won ₹50000 in the lucky draw. Pay a small processing fee of Rs.199 to claim your prize now: bit.ly/3xKq9">Prize and fee</button>
+        <button type="button" class="chip" data-kind="message" data-sample="Hey, are we still meeting at 4:30 PM for lunch? Bring the notes from yesterday's class.">Friend's note</button>
+      </div>
+    </form>
+
+    <form id="pane-url" role="tabpanel" aria-labelledby="tab-url" class="pane" hidden novalidate>
+      <label for="url-input">Paste the web address</label>
+      <input id="url-input" type="text" inputmode="url" autocomplete="off" spellcheck="false" maxlength="2048" placeholder="http://paypal-secure-login.top/verify">
+      <p class="hint">ThreatLens reads the address as text. It never opens the link.</p>
+      <div class="row">
+        <span></span>
+        <button type="submit" class="btn primary">Check address</button>
+      </div>
+      <div class="samples">
+        <span>Try an example:</span>
+        <button type="button" class="chip" data-kind="url" data-sample="http://amazon.account-verify.co/signin">Lookalike store</button>
+        <button type="button" class="chip" data-kind="url" data-sample="http://192.168.4.7/hdfc/login.html">Raw IP address</button>
+        <button type="button" class="chip" data-kind="url" data-sample="https://accounts.google.com/signin">Real sign-in</button>
+      </div>
+    </form>
+
+    <div class="recent" id="recent" hidden>
+      <div class="recent-head">
+        <h2>Recent checks</h2>
+        <button type="button" class="linkish" id="clear-recent">Clear</button>
+      </div>
+      <ul id="recent-list"></ul>
+    </div>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/check.js', v=asset_v) }}"></script>{% endblock %}

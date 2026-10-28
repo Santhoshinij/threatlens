@@ -1,0 +1,67 @@
+{
+  "sklearn_version": "1.9.1",
+  "messages": {
+    "accuracy": 1.0,
+    "f1": 1.0,
+    "confusion_matrix": [
+      [
+        142,
+        0
+      ],
+      [
+        0,
+        267
+      ]
+    ],
+    "test_size": 409
+  },
+  "urls": {
+    "accuracy": 0.9747,
+    "f1": 0.9753,
+    "confusion_matrix": [
+      [
+        300,
+        12
+      ],
+      [
+        4,
+        316
+      ]
+    ],
+    "test_size": 632,
+    "top_features": [
+      [
+        "num_digits",
+        0.1876
+      ],
+      [
+        "digit_ratio",
+        0.1827
+      ],
+      [
+        "num_keywords",
+        0.1228
+      ],
+      [
+        "brand_in_subdomain_or_path",
+        0.1068
+      ],
+      [
+        "suspicious_tld",
+        0.0752
+      ],
+      [
+        "num_subdomains",
+        0.0531
+      ],
+      [
+        "uses_https",
+        0.046
+      ],
+      [
+        "url_length",
+        0.0393
+      ]
+    ]
+  }
+}

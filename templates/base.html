@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}ThreatLens{% endblock %}</title>
+  <meta name="description" content="Paste a suspicious message or web address and see which parts look like a scam or phishing attempt.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Schibsted+Grotesk:wght@600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css', v=asset_v) }}">
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="{{ url_for('home') }}" aria-label="ThreatLens home">
+      <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true">
+        <circle cx="17" cy="17" r="11" fill="none" stroke="currentColor" stroke-width="3.5"/>
+        <path d="M25.5 25.5 35 35" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+        <path d="M11.5 18.5 15.5 22.5 23 12.5" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>ThreatLens</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a href="{{ url_for('home') }}"   {% if active == 'home' %}aria-current="page"{% endif %}>Home</a>
+      <a href="{{ url_for('check') }}"  {% if active == 'check' %}aria-current="page"{% endif %}>Check</a>
+      <a href="{{ url_for('result') }}" {% if active == 'result' %}aria-current="page"{% endif %}>Result</a>
+    </nav>
+  </header>
+
+  {% block content %}{% endblock %}
+
+  <footer class="foot">
+    <p>Nothing you paste is saved on the server. Recent checks stay in this browser only.</p>
+    <p>ThreatLens is a first check, not a guarantee. When money is involved, confirm through the official app or the number on your card.</p>
+  </footer>
+
+  <script src="{{ url_for('static', filename='js/common.js', v=asset_v) }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

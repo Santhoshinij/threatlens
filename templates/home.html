@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}ThreatLens: check a message or link before you trust it{% endblock %}
+{% block content %}
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <h1>Is that message real? Look closer before you click.</h1>
+      <p class="lead">Paste a suspicious SMS, email, or web address. ThreatLens marks the parts that look like a scam and tells you why, in plain language.</p>
+      <div class="cta-row">
+        <a class="btn primary big" href="{{ url_for('check') }}">Check a message</a>
+        <a class="btn ghost big" href="{{ url_for('check') }}?tab=url">Check a web address</a>
+      </div>
+    </div>
+
+    <figure class="hero-demo" aria-label="Example of a marked-up scam message">
+      <p class="annotated"><mark class="high">URGENT</mark>: Your SBI <mark class="high">account has been suspended</mark>. Verify your <mark class="medium">KYC</mark> <mark class="medium">within 24 hours</mark> at <mark class="high">http://sbi-kyc-update.xyz/login</mark> and share the <mark class="high">OTP</mark>.</p>
+      <figcaption><strong>Likely scam message</strong> &middot; 92% &middot; every highlight comes with a reason</figcaption>
+    </figure>
+  </section>
+
+  <section class="band">
+    <h2>What ThreatLens looks for</h2>
+    <div class="trio">
+      <div>
+        <h3>Pressure and threats</h3>
+        <p>“Act now”, “your account will be blocked”, “legal action”. Scammers rush you so you do not stop to think.</p>
+      </div>
+      <div>
+        <h3>Requests for private details</h3>
+        <p>OTPs, PINs, card numbers, Aadhaar, and “KYC updates”. Real banks never ask you to share these in a message.</p>
+      </div>
+      <div>
+        <h3>Tricks hidden in links</h3>
+        <p>Raw IP addresses, look-alike brand names, strange endings like .xyz, and shortened links that hide the real destination.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <h2>How it works</h2>
+    <ol class="steps">
+      <li><span class="n">1</span><div><h3>Paste</h3><p>On the Check page, paste a message or a web address.</p></div></li>
+      <li><span class="n">2</span><div><h3>Analyse</h3><p>Two trained models score the text and the link. Fixed rules find the exact warning signs.</p></div></li>
+      <li><span class="n">3</span><div><h3>Read the result</h3><p>See a verdict, a risk meter, your message marked up, the reasons, and what to do next.</p></div></li>
+    </ol>
+  </section>
+
+  <section class="band">
+    <details>
+      <summary>How ThreatLens decides, and where it can be wrong</summary>
+      <div class="about-body">
+        <p>Messages are scored by a text classifier trained on scam and ordinary messages. Links, including links inside messages, are scored by a second model that looks at the address itself: length, digits, subdomains, unusual endings, and look-alike brand names. The address is only read as text and is never opened.</p>
+        <p>A new scam can look harmless, and an odd but honest message can look risky. Treat the result as advice, not proof.</p>
+        <div id="metrics" class="metrics" hidden></div>
+      </div>
+    </details>
+  </section>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/home.js', v=asset_v) }}"></script>{% endblock %}

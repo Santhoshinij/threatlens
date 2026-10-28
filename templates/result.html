@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Result · ThreatLens{% endblock %}
+{% block content %}
+<main class="wide">
+  <section id="empty" class="panel empty-page" hidden>
+    <h1>No result to show yet</h1>
+    <p>Run a check first and the result will appear here.</p>
+    <p><a class="btn primary" href="{{ url_for('check') }}">Go to Check</a></p>
+  </section>
+
+  <div id="result" hidden>
+    <section class="panel verdict-card" aria-labelledby="verdict-label">
+      <div class="verdict" id="verdict">
+        <p class="verdict-kind" id="verdict-kind"></p>
+        <h1 class="verdict-label" id="verdict-label"></h1>
+        <p class="verdict-score"><span id="score-pct"></span> chance this is a scam</p>
+      </div>
+      <div class="meter" aria-hidden="true">
+        <div class="zone safe"></div><div class="zone warn"></div><div class="zone bad"></div>
+        <div class="marker" id="marker"></div>
+      </div>
+      <div class="meter-scale" aria-hidden="true"><span>Safe</span><span>Suspicious</span><span>Scam</span></div>
+    </section>
+
+    <div class="result-grid">
+      <section class="panel">
+        <div id="annotated-wrap" hidden>
+          <h2>Your message, marked up</h2>
+          <p class="annotated" id="annotated"></p>
+          <p class="legend">
+            <span><i class="sw high"></i>Strong warning sign</span>
+            <span><i class="sw medium"></i>Worth a second look</span>
+            <span><i class="sw link"></i>Link that looks normal</span>
+          </p>
+          <div id="links-wrap" hidden>
+            <h2>Links found</h2>
+            <ul class="links" id="links"></ul>
+          </div>
+        </div>
+        <div id="url-shown" hidden>
+          <h2>Address checked</h2>
+          <p class="url-line" id="url-line"></p>
+        </div>
+
+        <h2>What to do</h2>
+        <ul class="advice" id="advice"></ul>
+      </section>
+
+      <section class="panel">
+        <h2>Why this result</h2>
+        <ul class="signals" id="signals"></ul>
+      </section>
+    </div>
+
+    <div class="cta-row after">
+      <a class="btn primary" href="{{ url_for('check') }}">Check something else</a>
+      <a class="btn ghost" href="{{ url_for('home') }}">Back to home</a>
+    </div>
+  </div>
+</main>
+{% endblock %}
+{% block scripts %}<script src="{{ url_for('static', filename='js/result.js', v=asset_v) }}"></script>{% endblock %}
